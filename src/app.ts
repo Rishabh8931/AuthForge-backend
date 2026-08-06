@@ -2,13 +2,15 @@ import express from "express";
 import type { Application } from "express";
 
 // Common middleware
-import { requestId } from "@/common/middleware/request-id.js";
-import { security } from "@/common/middleware/security.js";
-import { errorHandler } from "@/common/errors/index.js";
-import { corsMiddleware } from "@/common/middleware/cors.js";
-import { requestLogger } from "@/common/middleware/request-logger.js";
-import { globalRateLimiter } from "./common/middleware/rate-limit.js";
-import { notFound } from "./common/middleware/not-found.js";
+import { errorHandler } from "@/common/errors/error-handler.js";
+import {
+  corsMiddleware,
+  requestId,
+  security,
+  globalRateLimiter,
+  requestLogger,
+  notFound,
+} from "@/common/middleware/index.js";
 
 const app: Application = express();
 
