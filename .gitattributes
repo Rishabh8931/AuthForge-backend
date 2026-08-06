@@ -1,0 +1,39 @@
+# ==========================================
+# Auto detect text files
+# ==========================================
+
+* text=auto
+
+# ==========================================
+# Source Code
+# ==========================================
+
+*.ts      text
+*.tsx     text
+*.js      text
+*.jsx     text
+*.json    text
+*.yml     text
+*.yaml    text
+*.md      text
+*.sql     text
+*.sh      text
+
+# ==========================================
+# Windows Scripts
+# ==========================================
+
+*.bat     text eol=crlf
+*.cmd     text eol=crlf
+
+# ==========================================
+# Binary Files
+# ==========================================
+
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.pdf     binary
+*.zip     binary
