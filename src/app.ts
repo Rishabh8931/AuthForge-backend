@@ -11,6 +11,7 @@ import {
   requestLogger,
   notFound,
 } from "@/common/middleware/index.js";
+import { healthRouter } from "@/modules/health/index.js";
 
 const app: Application = express();
 
@@ -34,5 +35,8 @@ app.use(notFound);
 
 /** global error handler */
 app.use(errorHandler);
+
+// register health router
+app.use("/health", healthRouter);
 
 export default app;
