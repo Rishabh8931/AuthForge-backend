@@ -1,14 +1,27 @@
-import { boolean, index, pgTable, text, uniqueIndex } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  index,
+  pgTable,
+  text,
+  uniqueIndex,
+  uuid,
+} from "drizzle-orm/pg-core";
 
 import { primaryKey, timestamps } from "./helper.js";
 import { clientTypeEnum } from "./enums.js";
+import { developers } from "./developer.js";
 
 export const clients = pgTable(
   "clients",
   {
     ...primaryKey(),
 
-    developerId: text("developer_id").notNull(),
+    developerId: uuid("developer_id")
+      .notNull()
+      .references(() => developers.id, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
 
     clientId: text("client_id").notNull(),
 
@@ -24,6 +37,7 @@ export const clients = pgTable(
   },
   (table) => [
     uniqueIndex("uq_clients_client_id").on(table.clientId),
+
     index("idx_clients_developer_id").on(table.developerId),
   ],
 );
