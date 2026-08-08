@@ -5,4 +5,19 @@ import { env } from "@/common/config/env.js";
 
 const sql = neon(env.DATABASE_URL);
 
-export const db = drizzle(sql);
+export const db = drizzle({ client: sql });
+
+// Test database connection
+async function checkDatabaseConnection() {
+  try {
+    await sql`SELECT 1`;
+
+    console.log("✅ Database connected successfully!");
+  } catch (error) {
+    console.error("❌ Database connection failed!");
+
+    console.error(error);
+  }
+}
+
+checkDatabaseConnection();

@@ -1,5 +1,6 @@
 import express from "express";
 import type { Application } from "express";
+import "@/common/db/connection.js";
 
 // Common middleware
 import { errorHandler } from "@/common/errors/error-handler.js";
