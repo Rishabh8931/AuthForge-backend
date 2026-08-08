@@ -1,1 +1,0 @@
-CREATE TYPE "public"."client_grant_type" AS ENUM('authorization_code', 'refresh_token');
