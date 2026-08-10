@@ -6,6 +6,8 @@ export const developers = pgTable(
   "developers",
   {
     ...primaryKey(),
+    firstName: text("first_name").notNull(),
+    lastName: text("last_name").notNull(),
 
     email: text("email").notNull(),
 
