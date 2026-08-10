@@ -6,7 +6,7 @@ export class HealthController {
   static getHealth: RequestHandler = (_req, res) => {
     const health = HealthService.getHealth();
 
-    res.status(200).json({
+     res.status(200).json({
       success: true,
       data: health,
     });

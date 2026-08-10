@@ -31,13 +31,12 @@ app.use(requestLogger);
 /** rate limiter middleware */
 app.use(globalRateLimiter);
 
+// register health router
+app.use("/health", healthRouter);
+
 /** Not found middleware */
 app.use(notFound);
 
 /** global error handler */
 app.use(errorHandler);
-
-// register health router
-app.use("/health", healthRouter);
-
 export default app;
