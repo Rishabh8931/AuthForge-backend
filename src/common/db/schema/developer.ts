@@ -24,3 +24,6 @@ export const developers = pgTable(
     index("idx_developers_is_active").on(table.isActive),
   ],
 );
+
+export type Developer = typeof developers.$inferSelect;
+export type NewDeveloper = typeof developers.$inferInsert;
