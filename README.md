@@ -131,20 +131,20 @@ Whether you're building SaaS products, APIs, microservices, or enterprise platfo
 
 # 🛠 Tech Stack
 
-| Category | Technology |
-|-----------|------------|
-| Language | TypeScript |
-| Runtime | Node.js 22+ |
-| Framework | Express.js |
-| Database | PostgreSQL |
-| ORM | Drizzle ORM |
-| Authentication | OAuth 2.1 |
-| Identity | OpenID Connect |
-| Token Format | JWT |
-| Validation | Zod |
-| Package Manager | pnpm |
-| Linting | ESLint |
-| Formatting | Prettier |
+| Category        | Technology     |
+| --------------- | -------------- |
+| Language        | TypeScript     |
+| Runtime         | Node.js 22+    |
+| Framework       | Express.js     |
+| Database        | PostgreSQL     |
+| ORM             | Drizzle ORM    |
+| Authentication  | OAuth 2.1      |
+| Identity        | OpenID Connect |
+| Token Format    | JWT            |
+| Validation      | Zod            |
+| Package Manager | pnpm           |
+| Linting         | ESLint         |
+| Formatting      | Prettier       |
 
 ---
 
@@ -219,30 +219,30 @@ src
 
 # 🔐 OAuth 2.1 Features
 
-| Feature | Status |
-|----------|--------|
-| Authorization Code | 🚧 |
-| PKCE | 🚧 |
-| Refresh Token | 🚧 |
-| Token Revocation | 🚧 |
-| Token Introspection | 🚧 |
-| Client Credentials | 🚧 |
-| Device Authorization | 🚧 |
-| JWT Access Tokens | 🚧 |
+| Feature              | Status |
+| -------------------- | ------ |
+| Authorization Code   | 🚧     |
+| PKCE                 | 🚧     |
+| Refresh Token        | 🚧     |
+| Token Revocation     | 🚧     |
+| Token Introspection  | 🚧     |
+| Client Credentials   | 🚧     |
+| Device Authorization | 🚧     |
+| JWT Access Tokens    | 🚧     |
 
 ---
 
 # 🪪 OpenID Connect Features
 
-| Feature | Status |
-|----------|--------|
-| Discovery | 🚧 |
-| JWKS | 🚧 |
-| UserInfo | 🚧 |
-| ID Token | 🚧 |
-| Nonce Validation | 🚧 |
-| RP Logout | 🚧 |
-| Dynamic Client Registration | 🚧 |
+| Feature                     | Status |
+| --------------------------- | ------ |
+| Discovery                   | 🚧     |
+| JWKS                        | 🚧     |
+| UserInfo                    | 🚧     |
+| ID Token                    | 🚧     |
+| Nonce Validation            | 🚧     |
+| RP Logout                   | 🚧     |
+| Dynamic Client Registration | 🚧     |
 
 ---
 
@@ -382,23 +382,32 @@ pnpm test:e2e
 
 ---
 
-# 🛣 Roadmap
+## project Progress
 
-- 🔄 OAuth 2.1
-- 🔄 OpenID Connect
-- 🔄JWT
-- 🔄PKCE
-- 🔄 Sessions
-- 🔄 Client Management
-- 🔄 Multi-Factor Authentication
-- 🔄 Passkeys (WebAuthn)
-- 🔄 SCIM
-- 🔄 SAML 2.0
-- 🔄 Federation
-- 🔄 Organization Support
-- 🔄 Admin Dashboard
-- 🔄 Plugin SDK
+1.  Foundation ✅
+2.  Core Infrastructure ✅
+3.  Security Middleware 🟡
+4.  Health Module ✅
+5.  Database Foundation ✅
+6.  Database Schemas ✅
+7.  Database Relationships ✅
+8.  Database Migrations ✅
+9.  Repository Layer ⬜
+10. Developer Module ⬜
+11. Client Module ⬜
+12. OAuth 2.1 ⬜
+13. Token Security ⬜
+14. OpenID Connect ⬜
+15. Cryptography ⬜
+16. Audit/Observability 🟡
+17. Testing ⬜
+18. Production ⬜
 
+Legend:
+
+✅ Complete
+🟡 Partially complete
+⬜ Not started
 ---
 
 # 🤝 Contributing
