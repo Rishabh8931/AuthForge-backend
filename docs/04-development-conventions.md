@@ -65,7 +65,7 @@ Do not use `any` to silence compiler errors.
 If a type is genuinely unknown, prefer:
 
 ```ts
-unknown
+unknown;
 ```
 
 and narrow it explicitly.
@@ -109,6 +109,26 @@ The alias makes architectural boundaries easier to read.
 
 ---
 
+# Coding Conventions
+
+                  AuthForge
+                    │
+          ┌─────────┴─────────┐
+          │                   │
+      Stateful/             Stateless/
+      dependent             standalone
+          │                   │
+          ▼                   ▼
+       Classes             Functions
+          │                   │
+    ┌─────┼─────┐       ┌─────┼─────┐
+    │           │       │     │     │
+    |           |       |    Utils  |
+
+Repository Service Controller Middleware
+
+---
+
 # 6. Naming Conventions
 
 Use descriptive names.
@@ -137,10 +157,10 @@ class ClientRepository {}
 Use camelCase:
 
 ```ts
-createClient()
-findClientById()
-clientId
-redirectUri
+createClient();
+findClientById();
+clientId;
+redirectUri;
 ```
 
 ## Constants
@@ -148,7 +168,7 @@ redirectUri
 Use descriptive names. Uppercase is appropriate for genuine global constants:
 
 ```ts
-MAX_TOKEN_LIFETIME
+MAX_TOKEN_LIFETIME;
 ```
 
 Do not uppercase every local variable.
@@ -826,13 +846,13 @@ Configuration should flow through the validated configuration system.
 Prefer:
 
 ```ts
-env.DATABASE_URL
+env.DATABASE_URL;
 ```
 
 over scattered direct reads:
 
 ```ts
-process.env.DATABASE_URL
+process.env.DATABASE_URL;
 ```
 
 throughout application code.
@@ -1208,24 +1228,24 @@ Before considering a feature complete:
 
 # 46. Quick Decision Table
 
-| Situation | Preferred location |
-|---|---|
-| Environment validation | `common/config` |
-| DB connection | `common/db` |
-| Drizzle schema | `common/db/schema` |
-| Generic crypto primitive | `common/crypto` |
-| Generic middleware | `common/middleware` |
-| API error infrastructure | `common/errors` |
-| Generic response utility | `common/utils` |
-| Domain business logic | `modules/<domain>` |
-| Domain repository | `modules/<domain>` |
-| Domain DTO/type | `modules/<domain>` |
-| Domain validation | `modules/<domain>` |
-| Security audit behavior | `modules/audit` |
-| OAuth protocol logic | `modules/oauth` |
-| OIDC logic | `modules/oidc` |
-| Token lifecycle | `modules/token` |
-| Session lifecycle | `modules/session` |
+| Situation                | Preferred location  |
+| ------------------------ | ------------------- |
+| Environment validation   | `common/config`     |
+| DB connection            | `common/db`         |
+| Drizzle schema           | `common/db/schema`  |
+| Generic crypto primitive | `common/crypto`     |
+| Generic middleware       | `common/middleware` |
+| API error infrastructure | `common/errors`     |
+| Generic response utility | `common/utils`      |
+| Domain business logic    | `modules/<domain>`  |
+| Domain repository        | `modules/<domain>`  |
+| Domain DTO/type          | `modules/<domain>`  |
+| Domain validation        | `modules/<domain>`  |
+| Security audit behavior  | `modules/audit`     |
+| OAuth protocol logic     | `modules/oauth`     |
+| OIDC logic               | `modules/oidc`      |
+| Token lifecycle          | `modules/token`     |
+| Session lifecycle        | `modules/session`   |
 
 ---
 

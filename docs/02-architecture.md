@@ -82,66 +82,58 @@ Response utilities
 
 # 3. High-Level Architecture
 
-```mermaid
-flowchart TB
+````mermaid
+flowchart TD
+    Client["Client / Browser"]
 
-    External["OAuth Client / API Consumer"]
-
-    subgraph Application["AuthForge Application"]
-        Server["server.ts"]
-        App["app.ts"]
-
-        subgraph HTTP["HTTP Boundary"]
-            Middleware["Middleware Pipeline"]
-            Routes["Module Routes"]
-            Controllers["Controllers"]
-        end
-
-        subgraph Domain["Business / Domain Layer"]
-            Services["Services"]
-            DomainRules["Domain & Protocol Rules"]
-        end
-
-        subgraph Persistence["Persistence Layer"]
-            Repositories["Repositories"]
-            Drizzle["Drizzle ORM"]
-        end
-
-        subgraph Common["Common Infrastructure"]
-            Config["Configuration"]
-            Validation["Validation"]
-            Crypto["Cryptography"]
-            Errors["Error Handling"]
-            Logger["Logging"]
-            Response["Response Utilities"]
-        end
+    subgraph Infrastructure["Cross-Cutting Infrastructure"]
+        Security["Security Middleware"]
+        CORS["CORS"]
+        RequestID["Request ID"]
+        RateLimit["Rate Limiting"]
+        RequestLogger["Request Logger"]
+        ErrorHandler["Error Handler"]
     end
 
-    DB[("Neon PostgreSQL")]
+    subgraph Application["Application Layer"]
+        Routes["Routes<br/>(Functions)"]
+        Controller["Controller<br/>(Classes)"]
+        Service["Service<br/>(Classes)"]
+    end
 
-    External --> Server
-    Server --> App
-    App --> Middleware
-    Middleware --> Routes
-    Routes --> Controllers
-    Controllers --> Services
-    Services --> DomainRules
-    Services --> Repositories
-    Repositories --> Drizzle
-    Drizzle --> DB
+    subgraph Persistence["Persistence Layer"]
+        Repository["Repository<br/>(Classes)"]
+        Drizzle["Drizzle ORM"]
+        PostgreSQL[("PostgreSQL")]
+    end
 
-    Services --> Validation
-    Services --> Crypto
-    Services --> Errors
-    Controllers --> Response
+    Client --> Security
+    Security --> CORS
+    CORS --> RequestID
+    RequestID --> RateLimit
+    RateLimit --> RequestLogger
+    RequestLogger --> Routes
 
-    Middleware --> Logger
-    App --> Config
-```
+    Routes --> Controller
+    Controller --> Service
+    Service --> Repository
+    Repository --> Drizzle
+    Drizzle --> PostgreSQL
+
+    ErrorHandler -. handles errors .-> Controller
+    ErrorHandler -. handles errors .-> Service
+    ErrorHandler -. handles errors .-> Repository
+
+    ```
 
 The important architectural principle is:
 
 > **Business domains depend on infrastructure capabilities, but infrastructure should not contain business-specific rules.**
+
+
+``` mermaid
+
+````
 
 ---
 
@@ -1410,23 +1402,23 @@ Consent decision
 
 Use this decision table:
 
-| Requirement | Location |
-|---|---|
-| Environment variable handling | `common/config` |
-| Database connection | `common/db` |
-| Database schema | `common/db/schema` |
-| Cryptographic primitive | `common/crypto` |
-| Global error type | `common/errors` |
-| Global middleware | `common/middleware` |
-| Generic validation helper | `common/validation` |
-| API response helper | `common/utils` |
-| OAuth business rule | `modules/oauth` |
-| Client business rule | `modules/client` |
-| User business rule | `modules/user` |
-| Token lifecycle | `modules/token` |
-| Consent lifecycle | `modules/consent` |
-| Audit behavior | `modules/audit` |
-| OIDC behavior | `modules/oidc` |
+| Requirement                   | Location            |
+| ----------------------------- | ------------------- |
+| Environment variable handling | `common/config`     |
+| Database connection           | `common/db`         |
+| Database schema               | `common/db/schema`  |
+| Cryptographic primitive       | `common/crypto`     |
+| Global error type             | `common/errors`     |
+| Global middleware             | `common/middleware` |
+| Generic validation helper     | `common/validation` |
+| API response helper           | `common/utils`      |
+| OAuth business rule           | `modules/oauth`     |
+| Client business rule          | `modules/client`    |
+| User business rule            | `modules/user`      |
+| Token lifecycle               | `modules/token`     |
+| Consent lifecycle             | `modules/consent`   |
+| Audit behavior                | `modules/audit`     |
+| OIDC behavior                 | `modules/oidc`      |
 
 ---
 
