@@ -1,44 +1,44 @@
 import { eq } from "drizzle-orm";
-import { db } from "@/common/db/index.js";
-import { developers, type Developer, type NewDeveloper } from "@/common/db/schema/index.js";
+import type { NeonHttpDatabase } from "drizzle-orm/neon-http";
+
+import { developers } from "@/common/db/schema/developer.js";
 
 export class DeveloperRepository {
-  async findById(id: string): Promise<Developer | undefined> {
-    const [developer] = await db.select().from(developers).where(eq(developers.id, id)).limit(1);
+  constructor(private readonly db: NeonHttpDatabase) {}
+
+  async create(data: typeof developers.$inferInsert) {
+    const [developer] = await this.db.insert(developers).values(data).returning({developerId: developers.id, email: developers.email, isActive: developers.isActive, emailVerifiedAt: developers.emailVerifiedAt});
 
     return developer;
   }
 
-  async findByEmail(email: string): Promise<Developer | undefined> {
-    const [developer] = await db.select({developerId : developers.id}).from(developers).where(eq(developers.email, email)).limit(1);
-
-    return developer;
-  }
-
-  async create(data: NewDeveloper): Promise<Developer> {
-    const [newDeveloper] = await db.insert(developers).values(data).returning();
-
-    return newDeveloper;
-  }
-
-  async update(id: string, data: Partial<NewDeveloper>): Promise<Developer | undefined> {
-    const [updatedDeveloper] = await db
-      .update(developers)
-      .set(data)
+  async findById(id: string) {
+    const [developer] = await this.db
+      .select({developerId: developers.id, email: developers.email, isActive: developers.isActive, emailVerifiedAt: developers.emailVerifiedAt})
+      .from(developers)
       .where(eq(developers.id, id))
-      .returning();
+      .limit(1);
 
-    return updatedDeveloper;
+    return developer ?? null;
   }
 
-  async delete(id: string): Promise<boolean> {
-    const result = await db
-      .delete(developers)
-      .where(eq(developers.id, id))
-      .returning({ id: developers.id });
+  async findByEmail(email: string) {
+    const [developer] = await this.db
+      .select()
+      .from(developers)
+      .where(eq(developers.email, email))
+      .limit(1);
 
-    return result.length > 0;
+    return developer ?? null;
+  }
+
+  async existsByEmail(email: string) {
+    const [developer] = await this.db
+      .select({ id: developers.id })
+      .from(developers)
+      .where(eq(developers.email, email))
+      .limit(1);
+
+    return developer !== undefined;
   }
 }
-
-export const developerRepository = new DeveloperRepository();
