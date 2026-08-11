@@ -13,6 +13,7 @@ import {
   notFound,
 } from "@/common/middleware/index.js";
 import { healthRouter } from "@/modules/health/index.js";
+import { developerRoutes } from "@/modules/developer/index.js";
 
 const app: Application = express();
 
@@ -34,6 +35,8 @@ app.use(globalRateLimiter);
 // register health router
 app.use("/health", healthRouter);
 
+// developer router
+app.use("/developers", developerRoutes);
 /** Not found middleware */
 app.use(notFound);
 

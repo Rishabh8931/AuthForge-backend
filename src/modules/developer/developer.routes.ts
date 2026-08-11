@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { DeveloperController } from "./developer.controller.js";
 
-const router : Router = Router();
+const router: Router = Router();
 
 /**
  * Developer Routes
@@ -12,15 +12,9 @@ const router : Router = Router();
  */
 
 // Register a new developer
-router.post(
-  "/",
-  DeveloperController.register,
-);
+router.post("/", DeveloperController.register);
 
 // Get a developer by ID
-router.get(
-  "/:id",
-  DeveloperController.getById,
-);
+router.get("/:id", DeveloperController.getById);
 
 export default router;
