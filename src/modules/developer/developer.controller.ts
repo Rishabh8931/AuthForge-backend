@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { ApiResponse } from "@/common/utils/response.js";
 import { developerService } from "./developer.composition.js";
+import { createDeveloperInputSchema, loginDeveloperInputSchema } from "./developer.dto.js";
 
 interface DeveloperParams {
   id: string;
@@ -14,7 +15,9 @@ export class DeveloperController {
    * The controller is responsible only for HTTP concerns.
    */
   static async register(req: Request, res: Response) {
-    const developer = await developerService.registerDeveloper(req.body);
+    const data = await createDeveloperInputSchema.parseAsync(req.body);
+
+    const developer = await developerService.registerDeveloper(data);
 
     return ApiResponse.created(res, { ...developer });
   }

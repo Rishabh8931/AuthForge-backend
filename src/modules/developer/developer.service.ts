@@ -39,7 +39,7 @@ export class DeveloperService {
     const developer = await this.developerRepository.findById(id);
 
     if (!developer) {
-      throw new Error("Developer not found");
+      throw ApiError.notFound("Developer not found", ErrorCode.CLIENT_NOT_FOUND);
     }
 
     return developer;

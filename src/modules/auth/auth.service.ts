@@ -1,6 +1,10 @@
 import type { DeveloperRepository } from "@/modules/developer/developer.repository.js";
 import { ApiError, ErrorCode } from "@/common/errors/index.js";
 import { verifyPassword } from "@/common/crypto/index.js";
+import {
+  type CreateDeveloperInput,
+  type LoginDeveloperInput,
+} from "@/modules/developer/developer.dto.js";
 
 export class AuthService {
   constructor(private readonly developerRepository: DeveloperRepository) {}
@@ -14,7 +18,9 @@ export class AuthService {
    *
    * Session creation will be added once the session layer is implemented.
    */
-  async signIn(email: string, password: string) {
+  async signIn(data: LoginDeveloperInput) {
+    const { email, password } = data;
+
     const developer = await this.developerRepository.findByEmail(email);
 
     // Do not reveal whether the email exists.
