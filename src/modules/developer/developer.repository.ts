@@ -7,14 +7,14 @@ export class DeveloperRepository {
   constructor(private readonly db: NeonHttpDatabase) {}
 
   async create(data: typeof developers.$inferInsert) {
-    const [developer] = await this.db.insert(developers).values(data).returning({developerId: developers.id, email: developers.email, isActive: developers.isActive, emailVerifiedAt: developers.emailVerifiedAt});
+    const [developer] = await this.db.insert(developers).values(data).returning();
 
     return developer;
   }
 
   async findById(id: string) {
     const [developer] = await this.db
-      .select({developerId: developers.id, email: developers.email, isActive: developers.isActive, emailVerifiedAt: developers.emailVerifiedAt})
+      .select()
       .from(developers)
       .where(eq(developers.id, id))
       .limit(1);
