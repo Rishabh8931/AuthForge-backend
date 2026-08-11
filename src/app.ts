@@ -17,6 +17,8 @@ import { developerRoutes } from "@/modules/developer/index.js";
 
 const app: Application = express();
 
+app.use(express.json());
+
 /** Request ID middleware */
 app.use(requestId);
 
